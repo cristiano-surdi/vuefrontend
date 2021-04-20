@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Dashboard />
+    <Header v-if="$route.name != 'notFound'"></Header>
+    <router-view />
   </div>
 </template>
 
@@ -8,12 +9,12 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import Dashboard from './components/Dashboard.vue'
+import Header from './components/Header.vue'
 
 export default {
   name: 'App',
   components: {
-    Dashboard
+    Header
   }
 }
 </script>

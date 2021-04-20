@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <Header />
     <div class="container mrgnbtm">
           <div class="row">
             <div class="col-md-8">
@@ -18,16 +17,15 @@
 </template>
 
 <script>
-import Header from './Header.vue'
 import CreateUser from './CreateUser.vue'
 import DisplayBoard from './DisplayBoard.vue'
 import Users from './Users.vue'
-import { getAllUsers, createUser } from '../services/UserService'
+import { baseApiUrl } from '@/global'
+import axios from 'axios'
 
 export default {
   name: 'Dashboard',
   components: {
-    Header,
     CreateUser,
     DisplayBoard,
     Users
@@ -40,19 +38,20 @@ export default {
   },
   methods: {
     getAllUsers() {
-      getAllUsers().then(response => {
-        console.log(response)
-        this.users = response
-        this.numberOfUsers = this.users.length
-      })
-    },
+            const url = `${baseApiUrl}/users`
+            
+            axios.get(url).then(res => {
+                console.log(res.data)
+                this.users = res.data
+                this.numberOfUsers = this.users.length
+            })
+        },
     userCreate(data) {
-      console.log('data:::', data)
-      //data.id = this.numberOfUsers + 1
-      createUser(data).then(response => {
-        console.log(response);
-        this.getAllUsers();
-      });
+      const method = 'post'
+      axios[method](`${baseApiUrl}/users`, data)
+          .then(() => {
+              this.getAllUsers();
+          })
     }
   },
   mounted () {
