@@ -8,6 +8,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -16,6 +17,7 @@
                   <td>{{ item.name }}</td>
                   <td>{{ item.email }}</td>
                   <td>{{ item.phone }}</td>
+                  <td><button type="button" @click='deleteUser(item)' class="btn btn-danger">Delete</button></td>
               </tr>
             </tbody>
         </table>
@@ -23,9 +25,14 @@
 </template>
 
 <script>
-
-    export default {
-        name: 'Users',
-        props: ['users']
-     }
+export default {
+    name: 'Users',
+    props: ['users'],
+    methods: {
+      deleteUser(data) {
+          console.log(data)
+          this.$emit('deleteUser', data)
+      }
+  }
+}
 </script>
