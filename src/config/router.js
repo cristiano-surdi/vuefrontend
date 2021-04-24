@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 
 import Home from '@/components/Home'
 import DashBoard from '@/components/Dashboard'
-import Products from '@/components/Products'
+import Products from '@/components/Product'
+import Categories from '@/components/Category'
 import NotFound from '@/components/NotFound'
 
 Vue.use(VueRouter)
@@ -16,15 +17,19 @@ const routes = [{
     name: 'dashboard',
     path: '/dashboard',
     component: DashBoard,
-    }, {
+}, {
     name: 'products',
     path: '/products',
     component: Products
 }, {
+    name: 'categories',
+    path: '/categories',
+    component: Categories
+}, {
     name: 'notFound',
-    path :'*',
-    component:NotFound
-  }]
+    path: '*',
+    component: NotFound
+}]
 
 const router = new VueRouter({
     mode: 'history',
